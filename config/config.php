@@ -39,7 +39,7 @@ define('IMG_DEFAULT', IMAGE_DIR . 'default.jpg');
 define('IMG_TXING', IMAGE_DIR . 'ty.jpg');
 
 #>>插件配置<<
-define('BAIDU_SITE_API', 'http://data.zz.baidu.com/urls?site=520.leunico.sinaapp.com&token=FmPt3beiE9VEhM9b&type=original'); //百度推送api
+define('BAIDU_SITE_API', '*****'); //百度推送api
 
 define('ADMIN_QINIU_DIR', ROOT_PATH . '/public/plug/qiniu/'); //七牛云SDK路径
 
@@ -60,13 +60,13 @@ define('COOKIE_PATH', '/home/wwwroot/cookie'); //cookie作用路径
 
 define('SESSION_PRE', PROJECT_NAME . '_'); //session前缀
 
-define('TOKEN', 'weixin'); //微信的
+define('TOKEN', '****'); //微信的
 
 define('EMAIL_SENT_FOR_REPLY', TRUE); //邮箱服务配置,TRUE是开启
 
-define('EMAIL_ADDRESS', '13826914162@163.com');
+define('EMAIL_ADDRESS', '****@163.com');
 
-define('EMAIL_PASSWORD', 'lzx013632350976');
+define('EMAIL_PASSWORD', '****');
 
 define('EMAIL_SMTP', 'smtp.163.com');
 
@@ -87,7 +87,7 @@ define('SQLDEBUG', FALSE); //启用数据库调试信息，true是开启
 #>>MEMCACHE缓存配置<<#
 define('MEMCACHE', TRUE); //是否开启缓存，TRUE是开启
 
-define('MEMCACHE_HOST', '112.74.92.88');
+define('MEMCACHE_HOST', '112.74.**.***');
 
 define('MEMCACHE_PORT', 11211);
 
@@ -100,12 +100,12 @@ define('MEMCACHE_COMPRESSION', FALSE);
 #>>数据库默认配置<<#
 define('DB_TYPE', 'mysql');
 
-define('DB_HOST', 'localhost');
+define('DB_HOST', '****');
 
 define('DB_PORT', '3306');
 
 define('DB_USERNAME', 'root');
 
-define('DB_PASSWORD', 'admin');
+define('DB_PASSWORD', '****');
 
-define('DB_NAME', 'alice');
+define('DB_NAME', '****');
