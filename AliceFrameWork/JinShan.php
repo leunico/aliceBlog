@@ -18,13 +18,13 @@ require_once ADMIN_JINSHAN_DIR.'Ks3Client.class.php';
 
 class JinShan {
 	
-	private $accessKey = 'TlFlO8u2ygMzTItSB/Zo';
-    private $secretKey = 'RAUfkjLesP6CilncuugZXuSYQhKVMTY1SRN85o1R';
+	private $accessKey = '****';
+        private $secretKey = '****';
 	private $bucket = "";
 	private $Client = "";
 	public function __construct($bucket = ''){
 	
-	     $this->Client = new \Ks3Client($this->accessKey,$this->secretKey);
+	         $this->Client = new \Ks3Client($this->accessKey,$this->secretKey);
 		 $this->bucket = $bucket ? $bucket : "nextimg";
 		 
 	}

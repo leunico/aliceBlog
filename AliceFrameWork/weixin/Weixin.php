@@ -9,9 +9,9 @@ namespace AliceFrameWork\weixin;
 
 class Weixin{
     
-    public $appid = "wxb33bef172a0860cf";
+    public $appid = "****";
     
-    public $appsecret = "0b35415865993d1be16b7655a8f673a0";
+    public $appsecret = "****";
     
     //构造函数，获取AccessToken,一共有三种方法获取，这是其一
     public function __construct(){
