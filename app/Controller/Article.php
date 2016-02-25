@@ -18,19 +18,19 @@ class Article{
             $scree['keyword'] = Request::getRequest('keyword', 'str');    
             $scree['num'] = Request::getRequest('num', 'str');     
             $scree['recommend_type'] = Request::getRequest('recommend_type', 'int');
-			$ret['scree'] = $scree;               
+            $ret['scree'] = $scree;               
             $ret['ArticleList'] = ArticleModel::getArticleList($page,$scree);                                       
         }else{        
             $ret['ArticleList'] = ArticleModel::getArticleList($page);//var_dump($ret);exit();            
         }    
         $ret['pageNav'] = @array_pop($ret['ArticleList']);
-		View::Transmit('admin/articles',$ret);
+	View::Transmit('admin/articles',$ret);
         
    }
     
    public static function my_show($id){
         
-		$ret = array();   
+	$ret = array();   
         $fields = Request::getRequest('page', 'int');        
         $page = isset($fields) && $fields > 0 ? $fields : 1;             
         $ret['ArticleList'] = ArticleModel::getArticleList_My($page,$id);
@@ -42,14 +42,14 @@ class Article{
    public static function delete($id){
        
         $result = ArticleModel::delArticle($id);
-		$result ? View::AdminMessage('goback', '删除成功') : View::AdminErrorMessage('goback', '删除失败');                   
+	$result ? View::AdminMessage('goback', '删除成功') : View::AdminErrorMessage('goback', '删除失败');                   
         
    }    
     
    public static function add(){
               
-	   $ret = $fields = array(); 
-	   $ret['loginInfo'] = Request::getSession('admin_user_login');          
+       $ret = $fields = array(); 
+       $ret['loginInfo'] = Request::getSession('admin_user_login');          
        if(Request::getRequest('dosubmit', 'str')){           
             adminController::is_admin();              
             $fields['title'] = Request::getRequest('title', 'str');           
@@ -61,9 +61,8 @@ class Article{
             $fields['tag'] = Request::getRequest('tag', 'str');                      
             $fields['mid'] = Request::getRequest('mid', 'str');           
             $fields['recommend_type'] = Request::getRequest('recommend_type', 'int');           
-            $fields['content'] = Request::getRequest('content', 'str');           
-            $fields['uid'] = $ret['loginInfo']['id'];                      
-            $fields['content'] = htmlspecialchars_decode($fields['content']);//如果使用UEditor，则反转义一次           
+            $fields['content'] = self::ToolContent(Request::getRequest('content', 'str'));           
+            $fields['uid'] = $ret['loginInfo']['id'];           
             $fields['good_num'] = $fields['bad_num'] =0;            
             $fields['ctime'] = time();                      
             $fields['image'] = ArticleModel::getArticleImage($fields['content'],0);            
@@ -83,13 +82,13 @@ class Article{
             $result ? View::AdminMessage('admin/articles', '添加成功') : View::AdminErrorMessage('goback', '添加失败');
        }           
        $ret['blogMenuList'] = getClass('article_class');
-	   View::Transmit('admin/article_add',$ret);          
+       View::Transmit('admin/article_add',$ret);          
         
     }
         
     public static function edit($type,$id){
        
-	   $ret = $fields = array(); 
+       $ret = $fields = array(); 
        if(Request::getRequest('dosubmit', 'str')){                           
             $fields['title'] = Request::getRequest('title', 'str');           
             $fields['seo_title'] = Request::getRequest('seo_title', 'str');           
@@ -100,8 +99,7 @@ class Article{
             $fields['tag'] = Request::getRequest('tag', 'str');                      
             $fields['mid'] = Request::getRequest('mid', 'str');           
             $fields['recommend_type'] = Request::getRequest('recommend_type', 'int');           
-            $fields['content'] = Request::getRequest('content', 'str');           
-            $fields['content'] = htmlspecialchars_decode($fields['content']);           
+            $fields['content'] = self::ToolContent(Request::getRequest('content', 'str'));
             $fields['clicks'] = Request::getRequest('clickst', 'int');                
             $fields['good_num'] = Request::getRequest('good_num', 'int');               
             $fields['bad_num'] = Request::getRequest('bad_num', 'int');          
@@ -121,7 +119,7 @@ class Article{
        }      
        $ret['blogMenuList'] = getClass('article_class');
        $ret['articles'] = ArticleModel::getOneArticle('id',$id);
-	   View::Transmit($type == '1' ? 'admin/article_edit':'admin/article_myedit',$ret);  
+       View::Transmit($type == '1' ? 'admin/article_edit':'admin/article_myedit',$ret);  
         
     }   
         
@@ -146,7 +144,13 @@ class Article{
 			
     }    
     
-    
+    public static function ToolContent($content){
+
+        $contentOne = htmlspecialchars_decode($content);
+        $contentOne = preg_replace('#<pre.*?>#','<pre><code class="language-css">',$contentOne);
+        return preg_replace('#</pre>#','</code></pre>',$contentOne);
+
+    }
     
     
     

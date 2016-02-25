@@ -4,9 +4,11 @@ $seo_title = $articleShow['seo_title'];
 $seo_keywords = $articleShow['seo_keywords'];
 $seo_description = $articleShow['seo_description'] ;
 $js = 'scrollmonitor.js?ver=version';
+$css = 'prism.css';
 include_once 'newheader.tpl.php'; ?>
 
 <body class="single single-post postid-3378 single-format-standard comment-open site-layout-2 wc-shortcodes-font-awesome-enabled">
+<script type='text/javascript' src='<?php echo JS_DIR?>prism.js'></script>
     
 <?php include_once 'newnav.tpl.php'; ?> 
 
