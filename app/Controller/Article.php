@@ -71,7 +71,7 @@ class Article{
                 $tagInfo = TagModel::getTagByTag($tag);                
                 if(!empty($tagInfo)){                    
                     $tagInfo['num']++;                    
-                    TagModel::editTag($tagInfo['id'], $tagInfo);                   
+                    TagModel::editTag($tagInfo['id'], $tagInfo,'');                   
                 }else{
                     $tagFields['tag'] = $tag;                    
                     $tagFields['num'] = 1;                    
