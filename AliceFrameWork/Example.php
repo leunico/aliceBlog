@@ -193,11 +193,11 @@ class Example extends Model{
         	}
         	$pagenav .= $page == $pages ? '</ul></div>':"<li><a href='$url?page=$pages".$key."'>尾页</a></li></ul></div>";
         	if($total<=$pagesize) $pagenav = ''; 
-			$result = $this->get($pagesize,($page-1)*$pagesize);
-			$result['page'] = $pagenav;    
-			return $result;	
+		$result = $this->get($pagesize,($page-1)*$pagesize);
+		$result['page'] = $pagenav;    
+		return $result;	
 		
-		}
+	}
 	
 	//前台分页
 	public function Pageindex($page,$pagesize=10,$comment=false) { 
