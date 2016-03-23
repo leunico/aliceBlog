@@ -50,23 +50,23 @@ class DiaryModel{
 	
 	public static function delTimewait($id){
 	
-	    $ret = new Example(self::$_table);
+	        $ret = new Example(self::$_table);
 		$Timg = self::getOneTimewait($id);
 		self::delTimewaitImg($Timg['img']);
 		return $ret->Delete()->where('id',$id)->change();	
 		
 	}
     
-    public static function getTimewiatIndex(){
+        public static function getTimewiatIndex(){
         
-        $ret = new Example(self::$_table);
-        return $ret->Data()->where('','')->order('order','ASC')->get(30);
+         	$ret = new Example(self::$_table);
+        	return $ret->Data()->where('','')->order('order','ASC')->get(30);
         
-    }
+        }
 	
 	public static function delTimewaitImg($fileurl){
 	
-	    $Img = new JinShan();
+	    	$Img = new JinShan();
 		$jinshanimg = explode('/',$fileurl);
 		$img = explode('@',$jinshanimg[3]);
 		return $Img->Delete(array($img[0]));	
@@ -86,11 +86,11 @@ class DiaryModel{
 		$Img = new JinShan();
 		foreach($doc['name'] as $k=>$file){
 			if(empty($doc['error'][$k]) && !empty($file)){
-			       $filename = explode(".",$file);
-                   $filename[0]="Push_".date("ymdHis");
-                   $giftpicname=implode(".",$filename);
-                   $tmp_name = $doc['tmp_name'][$k]; 	 
-			       $pushimg[$k] = $Img->PutImgFile($giftpicname,$tmp_name,'810&h=200&m=0&c=1');
+			    $filename = explode(".",$file);
+                   	    $filename[0]="Push_".date("ymdHis");
+                            $giftpicname=implode(".",$filename);
+                            $tmp_name = $doc['tmp_name'][$k]; 	 
+			    $pushimg[$k] = $Img->PutImgFile($giftpicname,$tmp_name,'810&h=200&m=0&c=1');
 			}		
 		}
 		return $ret->Updates(array('pushurl','pushimg'),array(self::UArray($pushurl),self::UArray($pushimg)))->change();		
@@ -105,11 +105,11 @@ class DiaryModel{
 		return $new;
 	}
     
-    public static function updateOrder($id,$type){
+	public static function updateOrder($id,$type){
 
-        $ret = new Example();
-        return $ret->query("UPDATE ".self::$_table." SET `order` = `order` ".$type." 1 WHERE id=$id");
+        	$ret = new Example();
+        	return $ret->query("UPDATE ".self::$_table." SET `order` = `order` ".$type." 1 WHERE id=$id");
         
-    }
+     	}
 	
 }
