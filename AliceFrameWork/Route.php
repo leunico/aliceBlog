@@ -12,11 +12,11 @@ class Route{
      //解析URL    
      public function parse(){
 		 
-		$pathInfo = !empty($_SERVER['PATH_INFO']) ? explode('/',$_SERVER['PATH_INFO']) : array(); 
+	$pathInfo = !empty($_SERVER['PATH_INFO']) ? explode('/',$_SERVER['PATH_INFO']) : array(); 
          
-		$className = !empty($pathInfo[1]) ? $pathInfo[1] : DEFAULT_CONTROLLER;
+	$className = !empty($pathInfo[1]) ? $pathInfo[1] : DEFAULT_CONTROLLER;
          
-		$methodName = !empty($pathInfo[2]) ? $pathInfo[2] : DEFAULT_METHOD;  
+	$methodName = !empty($pathInfo[2]) ? $pathInfo[2] : DEFAULT_METHOD;  
          
         $c = DEFAULT_APP_NAME.'\Controller\\'.$className.'Controller';  //var_dump($pathInfo);echo '</br>'.$_SERVER['PATH_INFO']; 
          
