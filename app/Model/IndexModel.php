@@ -22,12 +22,12 @@ class IndexModel{
 		
 	}
     
-    public static function getSearchList($fields){
+        public static function getSearchList($fields){
         
-        $ret = new Example(self::$_table);
-        return $ret->Data()->where(array('title','description'),array("%$fields%","%$fields%"),array('LIKE','LIKE'),'OR')->order('ctime','DESC')->get(20);
+        	$ret = new Example(self::$_table);
+        	return $ret->Data()->where(array('title','description'),array("%$fields%","%$fields%"),array('LIKE','LIKE'),'OR')->order('ctime','DESC')->get(20);
         
-    }
+        }
 	
 	public static function getTagList(){
 		
