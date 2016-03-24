@@ -11,23 +11,23 @@ use app\Model\ArticleModel;
 
 class indexController{
 	
-	public function index(){
+    public function index(){
 		
-		$fields = Request::getRequest('page', 'int');
+	$fields = Request::getRequest('page', 'int');
         $page = isset($fields) && $fields > 0 ? $fields : 1;                    
         $mem = new Memcache();        
         $ret = $mem->get('indexController_index_'.$page);
         if(empty($ret)){	        
             $ret = array();                       
             $ret['articleList'] = IndexModel::getArticleList($page);
-			$ret['pushArticleList'] = IndexModel::getPushArticleList();
-			$ret['tagList'] = IndexModel::getTagList();
-			$ret['pushIndex'] = IndexModel::getPushIndex();               
+	    $ret['pushArticleList'] = IndexModel::getPushArticleList();
+	    $ret['tagList'] = IndexModel::getTagList();
+	    $ret['pushIndex'] = IndexModel::getPushIndex();               
             $ret['pageNav'] = array_pop($ret['articleList']);                                         
             $mem->set('indexController_index_'.$page,$ret);
         }        
         $ret['commentList'] = IndexModel::getCommentList();
-		View::Transmit('newindex',$ret);        
+	View::Transmit('newindex',$ret);        
 			
     }
     
