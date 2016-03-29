@@ -1,42 +1,45 @@
-<?php
-
+<?php namespace AliceFrameWork;
 /*  
  *  自动载入函数文件
  *  @leunico 
  */
- 
-namespace AliceFrameWork;
 
-class Autoload{
-	
-	public function register(){
-	
-		spl_autoload_register(array($this,'autoload'));
-			
-	}
-	
-	public function autoload($className){
-	
-		$pathArr = explode('\\',$className);
-	        
-		$filename = array_pop($pathArr);
+class Autoload
+{
+    
+    public function register()
+    {
         
-		$dir = implode(DIRECTORY_SEPARATOR,$pathArr);
+        spl_autoload_register(array(
+            $this,
+            'autoload'
+        ));
         
-        	$filename = $dir.'/'.$filename.'.php'; //var_dump($filename.'--==--'.$className.'</br>');
+    }
+    
+    public function autoload($className)
+    {
         
-		if(file_exists($filename)){	
+        $pathArr = explode('\\', $className);
+        
+        $filename = array_pop($pathArr);
+        
+        $dir = implode(DIRECTORY_SEPARATOR, $pathArr);
+        
+        $filename = $dir . '/' . $filename . '.php';
+        
+        if (file_exists($filename)) {
             
-			require_once $filename;	
+            require_once $filename;
             
-		}else{
+        } else {
             
-			#exit('Error:'.$className.' loading Failed'); // 调试模式
-			#echo "Error:".$className." loading Failed <br/>"; // 兼容模式
-			NotFound(); //运营
+            #exit('Error:'.$className.' loading Failed'); // 调试模式
+            #echo "Error:".$className." loading Failed <br/>"; // 兼容模式
+            NotFound(); //运营
             
-		}
-				
-	}
-	
+        }
+        
+    }
+    
 }
