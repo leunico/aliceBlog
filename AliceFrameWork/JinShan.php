@@ -1,11 +1,8 @@
-<?php
-
+<?php namespace AliceFrameWork;
 /*  
  *  金山云操作文件
  *  @leunico 
  */
-
-namespace AliceFrameWork;
 
 define("KS3_API_VHOST", FALSE); //是否使用VHOST)
 define("KS3_API_LOG", FALSE); //是否开启日志(写入日志文件
