@@ -55,6 +55,7 @@ class View
         echo json_encode($results, JSON_NUMERIC_CHECK);
         exit();
     }
+    
     /**
      * 显示跳转信息页 ...
      */
@@ -64,6 +65,7 @@ class View
         include_once ROOT_PATH . '/templates/' . 'show_message.tpl.php';
         exit();
     }
+    
     /**
      * 显示错误信息页...
      */
@@ -76,8 +78,6 @@ class View
     
     /**
      * JS页面跳转 ...
-     * @param string $url
-     * @param int $timeOut
      */
     public static function jsJump($url, $timeOut = 0)
     {
