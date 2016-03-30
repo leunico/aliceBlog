@@ -192,11 +192,7 @@ class Example extends Model
             $postfix = substr($url, $strpos);
             $url = substr($url, 0, $strpos);
         }
-        if (substr($url, -1, 1) == '/') {
-            $s = '';
-        } else {
-            $s = '/';
-        }
+        $s = substr($url, -1, 1) == '/' ? '' : '/';
         $s = strpos($url, '-') === FALSE ? $s : '-';
         $pages = ceil($total / $pagesize);
         $page = min($pages, $page);
@@ -239,11 +235,7 @@ class Example extends Model
             $postfix = substr($url, $strpos);
             $url = substr($url, 0, $strpos);
         }
-        if (substr($url, -1, 1) == '/') {
-            $s = '';
-        } else {
-            $s = '/';
-        }
+        $s = substr($url, -1, 1) == '/' ? '' : '/';
         $s = strpos($url, '-') === FALSE ? $s : '-';
         $pages = ceil($total / $pagesize);
         $page  = min($pages, $page);
