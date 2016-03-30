@@ -13,8 +13,8 @@ use Qiniu\Storage\UploadManager;
 class Qiniu
 {
     
-    private $accessKey = 'BfR2VxdEwZavgGM3kVChc6F0NKwGMTPMUdUsywtz';
-    private $secretKey = 'jhifcIoBhyH_AQBsxAHChXaR9nWMed3F07pOI4JM';
+    private $accessKey = 'BfR2VxdEwZavgGM3kVChc6F0NKwGMTPMU****';
+    private $secretKey = 'jhifcIoBhyH_AQBsxAHChXaR9nWMed3F0****';
     private $bucket;
     private $Auth;
     public function __construct($bucket = '')
