@@ -42,22 +42,21 @@ return array(
 		
     ),
 	
-	//网站的友链
-	'friendslink' => array(
+    //网站的友链
+    'friendslink' => array(
 	    
-		'站长之家' => 'http://www.chinaz.com',
+	'站长之家' => 'http://www.chinaz.com',
 		
-		'AcFun弹幕网' => 'http://www.acfun.tv',
+	'AcFun弹幕网' => 'http://www.acfun.tv',
 		
-		'BiliBili弹幕网' => 'http://www.bilibili.com',
+	'BiliBili弹幕网' => 'http://www.bilibili.com',
 		
-		'开源中国' => 'http://www.oschina.net/',
+	'开源中国' => 'http://www.oschina.net/',
 		
-		'08CMS网站' => 'http://www.08cms.com/',
+	'08CMS网站' => 'http://www.08cms.com/',
         
         '和平鸽的博客' => 'http://txjia.com/tip/'
 	
-	),
-    
+    ),
        
 );
