@@ -1,53 +1,44 @@
-<?php
-
-namespace app\Model;
+<?php namespace app\Model;
 
 use AliceFrameWork\Example;
 
-class IndexModel{
-	
-	private static $_table = 'info_article';
-	
-	public static function getArticleList($page){
-		
-		$ret = new Example(self::$_table);
-		return $ret->Data('a.* ,COUNT(b.id) AS comcount')->Join('info_comment','LEFT','a.id=b.aid')->where('','')->group('a.id')->order(array('top','ctime'),array('DESC','DESC'))->Pageindex($page,10);
-	
-	}
-	
-	public static function getPushArticleList(){
-		
-		$ret = new Example(self::$_table);
-		return $ret->Data('id,image,title,mid,author')->where('recommend_type',2)->order(array('good_num','ctime'),array('DESC','DESC'))->get(6);
-		
-	}
+class IndexModel
+{
+    private $example;
     
-        public static function getSearchList($fields){
-        
-        	$ret = new Example(self::$_table);
-        	return $ret->Data()->where(array('title','description'),array("%$fields%","%$fields%"),array('LIKE','LIKE'),'OR')->order('ctime','DESC')->get(20);
-        
-        }
-	
-	public static function getTagList(){
-		
-		$ret = new Example('info_tag');
-		return $ret->Data()->where('','')->order('num','DESC')->get(15);
-		
-	}
-	
-	public static function getPushIndex(){
-		
-		$ret = new Example('info_indexpush');
-		return $ret->Data()->where('','')->order('utime','DESC')->get(4);
-		
-	}
-	
-	public static function getCommentList(){
-		
-		$ret = new Example('info_comment');
-		return $ret->Data('a.*,b.title')->Join(self::$_table,'INNER','a.aid=b.id')->where('','')->order('ctime','DESC')->get(5);
-		
-	}	
-	
+    public function __construct()
+    {
+        $this->example = new Example('info_article');
+    }
+    
+    public function getArticleList($page)
+    {
+        return $this->example->Data('a.* ,COUNT(b.id) AS comcount')->Join('info_comment', 'LEFT', 'a.id=b.aid')->where('', '')->group('a.id')->order(array('top', 'ctime'), array('DESC', 'DESC'))->Pageindex($page, 10);
+    }
+    
+    public function getPushArticleList()
+    {
+        return $this->example->Data('id,image,title,mid,author')->where('recommend_type', 2)->order(array('good_num', 'ctime'), array('DESC', 'DESC'))->get(6);
+    }
+    
+    public function getSearchList($fields)
+    {
+        return $this->example->Data()->where(array('title', 'description'), array("%{$fields}%", "%{$fields}%"), array('LIKE', 'LIKE'), 'OR')->order('ctime', 'DESC')->get(20);
+    }
+    
+    public function getTagList()
+    {
+        return $this->example->setBind('info_tag')->Data()->where('', '')->order('num', 'DESC')->get(15);
+    }
+    
+    public function getPushIndex()
+    {
+        return $this->example->setBind('info_indexpush')->Data()->where('', '')->order('utime', 'DESC')->get(4);
+    }
+    
+    public function getCommentList()
+    {
+        return $this->example->setBind('info_comment')->Data('a.*,b.title')->Join('info_article', 'INNER', 'a.aid=b.id')->where('', '')->order('ctime', 'DESC')->get(5);
+    }
+    
 }
