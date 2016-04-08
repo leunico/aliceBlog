@@ -11,16 +11,16 @@ use Qiniu\Storage\UploadManager;
 
 class Qiniu {
 	
-	private $accessKey = 'BfR2VxdEwZavgGM3kVChc6F0NKwGMTPMUdUsywtz';
-    private $secretKey = 'jhifcIoBhyH_AQBsxAHChXaR9nWMed3F07pOI4JM';
-	private $bucket = "";
-	private $Auth = "";
-	public function __construct($bucket = ''){
+    private $accessKey = 'BfR2VxdEwZavgGM3kVChc6F0NKwGMTP******';
+    private $secretKey = 'jhifcIoBhyH_AQBsxAHChXaR9nWMed3******';
+    private $bucket = "";
+    private $Auth = "";
+    public function __construct($bucket = ''){
 	
-	     $this->auth = new Auth($this->accessKey, $this->secretKey);
-		 $this->bucket = $bucket ? $bucket : "lzxya";
+	$this->auth = new Auth($this->accessKey, $this->secretKey);
+	$this->bucket = $bucket ? $bucket : "lzxya";
 		 
-	}
+    }
     
     public function PutImgFile($filename,$filePath){
         
