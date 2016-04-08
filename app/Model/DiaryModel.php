@@ -1,115 +1,104 @@
-<?php
-
-namespace app\Model;
+<?php namespace app\Model;
 
 use AliceFrameWork\Example;
-use AliceFrameWork\JinShan;
 
-class DiaryModel{
-	
-	private static $_table = 'info_time';
-	
-	public static function getTimewaitList($page){
-		
-		$ret = new Example(self::$_table);
-		return $ret->Data()->where('','')->order('order','ASC')->Paginate($page,10);
-		
-	}
-	
-	public static function getOneTimewait($id){
-		
-		$ret = new Example(self::$_table);
-		return $ret->Find('id',$id);
-		
-	}
-	
-	public static function setTimewait($fields){
-		
-		$ret = new Example(self::$_table);
-		return $ret->Insert($fields)->change();		
-	}
-	
-	public static function editTimewait($id,$fields){
-		
-		$ret = new Example(self::$_table);
-		return $ret->Update($fields)->where('id',$id)->change();
-		
-	}
-	
-	public static function setTimewaitImg($image){
-		
-		if(empty($image['error'])){
-		   $Img = new JinShan();
-		   $name = "Timewait_".rand(100,999).time().'.jpg';
-		   return $Img->PutImgFile($name,$image['tmp_name'],120);
-		}else{
-		   return false;	
-		}
-		
-	}
-	
-	public static function delTimewait($id){
-	
-	        $ret = new Example(self::$_table);
-		$Timg = self::getOneTimewait($id);
-		self::delTimewaitImg($Timg['img']);
-		return $ret->Delete()->where('id',$id)->change();	
-		
-	}
+class DiaryModel
+{
+    private $example;
     
-        public static function getTimewiatIndex(){
-        
-         	$ret = new Example(self::$_table);
-        	return $ret->Data()->where('','')->order('order','ASC')->get(30);
-        
+    public function __construct()
+    {
+        $this->example = new Example('info_time');
+    }
+    
+    public function getTimewaitList($page)
+    {
+        return $this->example->Data()->where('', '')->order('order', 'ASC')->Paginate($page, 10);
+    }
+    
+    public function getOneTimewait($id)
+    {
+        return $this->example->Find('id', $id);
+    }
+    
+    public function setTimewait($fields)
+    {
+        return $this->example->Insert($fields)->change();
+    }
+    
+    public function editTimewait($id, $fields)
+    {
+        return $this->example->Update($fields)->where('id', $id)->change();
+    }
+    
+    public function setTimewaitImg($Img, $image)
+    {
+        $category = YUN_IMAGE ? '?imageView2/1/w/120/h/120' : '@base@tag=imgScale&q=85&w=120';
+        if (empty($image['error'])) {
+            $name = 'tw_' . rand(100, 999) . time() . '.jpg';
+            return $Img->PutImgFile($name, $image['tmp_name'], $category);
+        } else {
+            return false;
         }
-	
-	public static function delTimewaitImg($fileurl){
-	
-	    	$Img = new JinShan();
-		$jinshanimg = explode('/',$fileurl);
-		$img = explode('@',$jinshanimg[3]);
-		return $Img->Delete(array($img[0]));	
-		
-	}
-	
-	public static function getPushList(){
-		
-		$ret = new Example('info_indexpush');
-		return $ret->Data()->where('','')->order('utime','DESC')->get(4);
-		
-	}
-	
-	public static function editPush($pushurl,$pushimg,$doc){
-		
-		$ret = new Example('info_indexpush');
-		$Img = new JinShan();
-		foreach($doc['name'] as $k=>$file){
-			if(empty($doc['error'][$k]) && !empty($file)){
-			    $filename = explode(".",$file);
-                   	    $filename[0]="Push_".date("ymdHis");
-                            $giftpicname=implode(".",$filename);
-                            $tmp_name = $doc['tmp_name'][$k]; 	 
-			    $pushimg[$k] = $Img->PutImgFile($giftpicname,$tmp_name,'810&h=200&m=0&c=1');
-			}		
-		}
-		return $ret->Updates(array('pushurl','pushimg'),array(self::UArray($pushurl),self::UArray($pushimg)))->change();		
-	}
-	
-	public static function UArray($array=array()){
-		
-		$new = array();
-		foreach($array as $k=>$v){
-			$new[$k+1] = $v;			
-		}
-		return $new;
-	}
+    }
     
-	public static function updateOrder($id,$type){
-
-        	$ret = new Example();
-        	return $ret->query("UPDATE ".self::$_table." SET `order` = `order` ".$type." 1 WHERE id=$id");
-        
-     	}
-	
+    public function delTimewait($Img, $id)
+    {
+        $Timg = $this->getOneTimewait($id);
+        $this->delTimewaitImg($Img, $Timg['img']);
+        return $this->example->Delete()->where('id', $id)->change();
+    }
+    
+    public function getTimewiatIndex()
+    {
+        return $this->example->Data()->where('', '')->order('order', 'ASC')->get(30);
+    }
+    
+    public function delTimewaitImg($thumb, $fileurl)
+    {
+        if (YUN_IMAGE) {
+            $qiniuimg = explode('/', $fileurl);
+            $img = explode('?', $qiniuimg[3]);
+            $thumb->Delete($img[0]);
+        } else {
+            $jinshanimg = explode('/', $fileurl);
+            $img = explode('@', $jinshanimg[3]);
+            $thumb->Delete(array($img[0]));
+        }
+    }
+    
+    public function getPushList()
+    {
+        return $this->example->setBind('info_indexpush')->Data()->where('', '')->order('utime', 'DESC')->get(4);
+    }
+    
+    public function editPush($Img, $pushurl, $pushimg, $doc)
+    {
+        $category = YUN_IMAGE ? '?imageView2/1/w/810/h/200' : '@base@tag=imgScale&q=85&w=810&h=200&m=0&c=1';
+        foreach ($doc['name'] as $k => $file) {
+            if (empty($doc['error'][$k]) && !empty($file)) {
+                $filename = explode('.', $file);
+                $filename[0] = 'push_' . date('ymdHis');
+                $giftpicname = implode('.', $filename);
+                $tmp_name = $doc['tmp_name'][$k];
+                $pushimg[$k] = $Img->PutImgFile($giftpicname, $tmp_name, $category);
+            }
+        }
+        return $this->example->setBind('info_indexpush')->Updates(array('pushurl', 'pushimg'), array($this->UArray($pushurl), $this->UArray($pushimg)))->change();
+    }
+    
+    public function UArray($array = array())
+    {
+        $new = array();
+        foreach ($array as $k => $v) {
+            $new[$k + 1] = $v;
+        }
+        return $new;
+    }
+    
+    public function updateOrder($id, $type)
+    {
+        return $this->example->query('UPDATE info_time SET `order` = `order` ' . $type . " 1 WHERE id={$id}");
+    }
+    
 }
