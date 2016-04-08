@@ -1,13 +1,11 @@
-<?php
+<?php namespace app\Controller;
 
-namespace app\Controller;
-
-class Controller{
-
+class Controller
+{
     protected static $models;
-
-    public function __construct($model){
-
+    
+    public function __construct($model)
+    {
         //注册！
         $model->Index = 'app\Model\IndexModel';
         $model->Admin = 'app\Model\AdminModel';
@@ -23,7 +21,6 @@ class Controller{
         $model->Qiniu = 'AliceFrameWork\Qiniu';
         $model->SmtpMail = 'AliceFrameWork\SmtpMail';
         self::$models = $model;
-
     }
-
+    
 }
