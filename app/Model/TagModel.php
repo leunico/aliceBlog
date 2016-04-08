@@ -1,81 +1,68 @@
-<?php
-
-namespace app\Model;
+<?php namespace app\Model;
 
 use AliceFrameWork\Example;
 
-class TagModel{
-	
-    private static $_table = 'info_tag';
-	
-    public static function getTagList($page){
-		
-	$ret = new Example(self::$_table);
-	return $ret->Data()->where('','')->order('num','DESC')->Paginate($page,10);
-		
+class TagModel
+{
+    private $example;
+    
+    public function __construct()
+    {
+        $this->example = new Example('info_tag');
     }
     
-    public static function getTagAll(){
-        
-        $ret = new Example(self::$_table);
-	return $ret->Data()->where('','')->order('num','DESC')->get();
-        
+    public function getTagList($page)
+    {
+        return $this->example->Data()->where('', '')->order('num', 'DESC')->Paginate($page, 10);
     }
-	
-    public static function getTagByTag($tag){
-		
-	$ret = new Example(self::$_table);
-	return $ret->Find('tag',$tag);
-		
+    
+    public function getTagAll()
+    {
+        return $this->example->Data()->where('', '')->order('num', 'DESC')->get();
     }
-	
-    public static function getTagById($id){
-		
-	$ret = new Example(self::$_table);
-	return $ret->Find('id',$id);
-		
+    
+    public function getTagByTag($tag)
+    {
+        return $this->example->Find('tag', $tag);
     }
-	
-    public static function editTag($id,$fields,$oldtag){
-	    	
-	$ret = new Example(self::$_table);		
-	$tag = $ret->Update($fields)->where('id',$id)->change();
-	return $oldtag ? self::editArticleTag($oldtag,$fields['tag']) : false;
+    
+    public function getTagById($id)
+    {
+        return $this->example->Find('id', $id);
     }
-	
-    public static function setTag($fields){
-		
-	$ret = new Example(self::$_table);
-	return $ret->Insert($fields)->change();
-		
+    
+    public function editTag($id, $fields, $oldtag)
+    {
+        $tag = $this->example->Update($fields)->where('id', $id)->change();
+        return $oldtag ? $this->editArticleTag($oldtag, $fields['tag']) : false;
     }
-	
-    public static function editArticleTag($oldtag,$newtag){ //待修复
-		
-	$ret = new Example('info_article');
-	$result = $ret->Data('id')->where('tag',$oldtag,'LIKE')->get();
-	return $result ? $ret->Updates(array('tag'),array(self::UArray($result,$newtag)))->change() : true;
-		
-     }
-	
-     private static function UArray($array,$newkey){
-		
-	$new = array();
-	foreach($array as $k=>$v){
-	    $new[$v['id']] = $newkey;			
-	}
-	return $new;
-
-     }
-	
-     public static function delTag($id){
-		
-	$ret = new Example(self::$_table);
-	$tag = self::getTagById($id);
-	$result = $ret->Delete()->where('id',$id)->change();
-	return $tag ? self::editArticleTag($tag['tag'],'杂文') : false;
-		
-     }
-	
-	
+    
+    public function setTag($fields)
+    {
+        return $this->example->Insert($fields)->change();
+    }
+    
+    public function editArticleTag($oldtag, $newtag)
+    {
+        //可优化
+        $result = $this->example->setBind('info_article')->Data('id')->where('tag', $oldtag, 'LIKE')->get();
+        return $result ? $ret->Updates(array('tag'), array($this->UArray($result, $newtag)))->change() : true;
+    }
+    
+    private function UArray($array, $newkey)
+    {
+        $new = array();
+        foreach ($array as $k => $v) {
+            $new[$v['id']] = $newkey;
+        }
+        return $new;
+    }
+    
+    public function delTag($id)
+    {
+        $tag = $this->getTagById($id);
+        $result = $this->example->Delete()->where('id', $id)->change();
+        return $tag ? $this->editArticleTag($tag['tag'], '杂文') : false;
+    }
+    
 }
