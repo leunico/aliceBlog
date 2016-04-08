@@ -39,17 +39,17 @@ define('IMG_DEFAULT', IMAGE_DIR . 'default.jpg');
 define('IMG_TXING', IMAGE_DIR . 'ty.jpg');
 
 #>>插件配置<<
-define('BAIDU_SITE_API', '*****'); //百度推送api
+define('BAIDU_SITE_API', 'http://data.zz.baidu.com/urls?site=www.lzxya.com&token=******'); //百度推送api
 
 define('ADMIN_QINIU_DIR', ROOT_PATH . '/public/plug/qiniu/'); //七牛云SDK路径
 
-define('ADMIN_JINSHAN_DIR', ROOT_PATH . '/public/plug/ks/'); //金山云SDK路径 PS.暂时只会用金山云
+define('ADMIN_JINSHAN_DIR', ROOT_PATH . '/public/plug/ks/'); //金山云SDK路径
 
-define('QINIU_DIR_THUMB', '?imageView2/2/w/210/h/140/format/jpg/interlace/0/q/100'); //七牛云图片链接后缀
+define('QINIU_DIR_THUMB', 'http://7xnvnk.com1.z0.glb.clouddn.com/'); //七牛云域名(不包括文章用的bucket)
 
-define('JINSHAN_DIR_THUMB', '@base@tag=imgScale&q=85&w='); //金山云图片链接后缀
+define('YUN_IMAGE', TRUE); //TRUE是七牛，FALSE是金山，和下面的一起改
 
-define('ADMIN_UEDITOR_DIR', PLUG_DIR . 'ueditor_k/'); //百度UEDITOR富文本编辑器ueditor_k是金山云，ueditor是七牛云
+define('ADMIN_UEDITOR_DIR', PLUG_DIR . 'ueditor_q/'); //百度UEDITOR富文本编辑器ueditor_k是金山云，ueditor_q是七牛云
 
 #>>项目配置<<
 define('COOKIE_DOMAIN', ''); //cookie 作用域
@@ -60,13 +60,13 @@ define('COOKIE_PATH', '/home/wwwroot/cookie'); //cookie作用路径
 
 define('SESSION_PRE', PROJECT_NAME . '_'); //session前缀
 
-define('TOKEN', '****'); //微信的
+define('TOKEN', 'weixin'); //微信的
 
 define('EMAIL_SENT_FOR_REPLY', TRUE); //邮箱服务配置,TRUE是开启
 
-define('EMAIL_ADDRESS', '****@163.com');
+define('EMAIL_ADDRESS', '******@163.com');
 
-define('EMAIL_PASSWORD', '****');
+define('EMAIL_PASSWORD', '******');
 
 define('EMAIL_SMTP', 'smtp.163.com');
 
@@ -82,30 +82,30 @@ define('DEFAULT_METHOD', 'index'); //默认加载的方法
 
 define('DEBUG', 1); //启用调试信息，1是开启
 
-define('SQLDEBUG', FALSE); //启用数据库调试信息，true是开启
+define('SQLDEBUG', FALSE); //启用数据库调试信息，FALSE是关闭
 
 #>>MEMCACHE缓存配置<<#
 define('MEMCACHE', TRUE); //是否开启缓存，TRUE是开启
 
-define('MEMCACHE_HOST', '112.74.**.***');
+define('MEMCACHE_HOST', '******');
 
 define('MEMCACHE_PORT', 11211);
 
 define('MEMCACHE_EXPIRATION', 6*3600);
 
-define('MEMCACHE_PREFIX', 'Alice');
+define('MEMCACHE_PREFIX', '******');
 
 define('MEMCACHE_COMPRESSION', FALSE);
 
 #>>数据库默认配置<<#
 define('DB_TYPE', 'mysql');
 
-define('DB_HOST', '****');
+define('DB_HOST', 'localhost');
 
 define('DB_PORT', '3306');
 
-define('DB_USERNAME', 'root');
+define('DB_USERNAME', '******');
 
-define('DB_PASSWORD', '****');
+define('DB_PASSWORD', '******');
 
-define('DB_NAME', '****');
+define('DB_NAME', '******');
