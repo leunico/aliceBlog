@@ -70,7 +70,7 @@ class articleshowController extends Controller
         }
         $comment = self::$models->Comment;
         //$comment->IpLimit($fields['ip']); //防止评论灌水攻击
-        $fields['contents'] = $comment->SelfXssattack($fields['contents']);
+        $comment->SelfXssattack(& $fields['contents']);
         //防止Xss攻击
         if (strstr($fields['cid'], '-')) {
             $parents = explode('-', $fields['cid']);
