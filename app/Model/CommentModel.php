@@ -97,8 +97,8 @@ class CommentModel
     
     public function SelfXssattack($content)
     {
-        //$content = htmlspecialchars_decode($content);
-        return preg_replace('#script>#', 'xsscript>', $content);
+        //$content = htmlspecialchars_decode($content);这是简单处理...
+        preg_replace('#script>#', 'xsscript>', $content);
     }
     
     public function SendMail($smtp, $mailid, $commentcon, $comment)
