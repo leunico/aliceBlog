@@ -94,7 +94,7 @@ class articleshowController extends Controller
             $comment->Ifuser($fields['nickname'], $fields['email'], $fields['website']);
             //记录游客信息
             if (EMAIL_SENT_FOR_REPLY && $fields['cid'] > 0 && !empty($commentp)) {
-                $comment->SendMail(self::$models->SmtpMail, $tomail, $fields['contents'], $commentp);
+                $comment->SendMail(self::$models->SmtpMail, $fields['contents'], $commentp);
             }
             //邮件
             $toid = empty($commentp) ? '#' : $commentp['id'];
