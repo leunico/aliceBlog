@@ -101,12 +101,9 @@ class CommentModel
         preg_replace('#script>#', 'xsscript>', $content);
     }
     
-    public function SendMail($smtp, $mailid, $commentcon, $comment)
+    public function SendMail($smtp, $commentcon, $comment)
     {
-        if (empty($mailid)) {
-            return FALSE;
-        }
-        if (!Is_email($comment['contents'])) {
+        if (!Is_email($comment['email'])) {
             return FALSE;
         }
         $url = HTTP_ROOT . 'articleshow/' . $comment['aid'] . '#comments-' . $comment['id'];
