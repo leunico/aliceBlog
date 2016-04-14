@@ -33,7 +33,7 @@ class articleshowController extends Controller
         if (!empty($ret['comments']['counts'])) {
             $ret['articleShow']['counts'] = array_pop($ret['comments']);
         }
-        if (isset($ret['comments']['page'])) {
+        if (!empty($ret['comments']['page'])) {
             $ret['articleShow']['commentPage_nav'] = array_pop($ret['comments']);
         }
         $article->updatePlus($id, 'clicks');
