@@ -95,7 +95,7 @@ class CommentModel
         return $this->example->Delete()->where('id', $id)->change();
     }
     
-    public function SelfXssattack($content)
+    public function SelfXssattack(&$content)
     {
         //$content = htmlspecialchars_decode($content);这是简单处理...
         preg_replace('#script>#', 'xsscript>', $content);
