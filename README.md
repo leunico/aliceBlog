@@ -6,7 +6,7 @@
 
 The MIT License (MIT)
 
-Copyright (c) 2015 Ovilia
+Copyright (c) 2015 Leunico
 
 自己写的一个个人技术博客，主要为了练习完整的网站MVC架构和Linux服务器的运维操作（aliyun）
 网站实际设计是利用PATH_INFO分发路由-控制器-模型层-渲染视图，主要利用了工厂模式，单例模式，注册器模式以及Psr-0规范。
